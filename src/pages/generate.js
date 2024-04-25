@@ -4,10 +4,10 @@ import QRCode from "react-qr-code";
 import Link from "next/link";
 import { GoHomeFill } from "react-icons/go";
 import QRCodeSVG from "qrcode";
-import Generate from "@/hooks/generate.hook";
+import useGenerate from "@/hooks/generate.hook";
 
 export default function Generate() {
-  const { ClickGenerate } = Generate();
+  const { ClickGenerate } = useGenerate();
   const [qrCodeValue, setQrCodeValue] = useState("โปรดใส่ชื่อโปรเจค");
 
 

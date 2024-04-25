@@ -11,32 +11,32 @@ function ProfileImagePicker() {
     const [rename, setRename] = useState("")
     const router = useRouter();
 
-    const [usedSpace, setUsedSpace] = useState(getUsedLocalStorageSpace());
-    const [remainingSpace, setRemainingSpace] = useState(getRemainingLocalStorageSpace());
+    // const [usedSpace, setUsedSpace] = useState(getUsedLocalStorageSpace());
+    // const [remainingSpace, setRemainingSpace] = useState(getRemainingLocalStorageSpace());
 
-    function getUsedLocalStorageSpace() {
-        let total = 0;
-        for (let key in localStorage) {
-            if (localStorage.hasOwnProperty(key)) {
-                let value = localStorage.getItem(key);
-                total += (value.length * 2) / 1024 / 1024;
-            }
-        }
-        return total.toFixed(2);
-    }
-
-
-    function getRemainingLocalStorageSpace() {
-        const maxCapacity = 5;
-        const usedSpace = getUsedLocalStorageSpace();
-        return (maxCapacity - usedSpace).toFixed(2);
-    }
+    // function getUsedLocalStorageSpace() {
+    //     let total = 0;
+    //     for (let key in localStorage) {
+    //         if (localStorage.hasOwnProperty(key)) {
+    //             let value = localStorage.getItem(key);
+    //             total += (value.length * 2) / 1024 / 1024;
+    //         }
+    //     }
+    //     return total.toFixed(2);
+    // }
 
 
-    const updateStorageInfo = () => {
-        setUsedSpace(getUsedLocalStorageSpace());
-        setRemainingSpace(getRemainingLocalStorageSpace());
-    };
+    // function getRemainingLocalStorageSpace() {
+    //     const maxCapacity = 5;
+    //     const usedSpace = getUsedLocalStorageSpace();
+    //     return (maxCapacity - usedSpace).toFixed(2);
+    // }
+
+
+    // const updateStorageInfo = () => {
+    //     setUsedSpace(getUsedLocalStorageSpace());
+    //     setRemainingSpace(getRemainingLocalStorageSpace());
+    // };
 
 
     const handleImageChange = (event) => {
@@ -122,8 +122,8 @@ function ProfileImagePicker() {
             {full ? (
                 <div className='absolute w-64 h-80 flex justify-center items-center bg-gray-800 shadow-lg rounded-md '>
                     <div className='px-2'>
-                        <p className='text-white text-sm'>ใช้พื้นที่ไปแล้ว: {usedSpace} MB</p>
-                        <p className='text-white text-sm'>พื้นที่คงเหลือ: {remainingSpace} MB</p>
+                        {/* <p className='text-white text-sm'>ใช้พื้นที่ไปแล้ว: {usedSpace} MB</p>
+                        <p className='text-white text-sm'>พื้นที่คงเหลือ: {remainingSpace} MB</p> */}
                         <button className='absolute bottom-0 right-0 bg-green-500 m-6 rounded-md p-2 text-white font-bold' onClick={clearLocalStorage}>เพิ่มพื้นที่</button>
                     </div>
                     <button className='absolute bottom-0 right-20 underline m-6 rounded-md p-2 text-white font-bold' onClick={() => { setFull(false) }}>cancle</button>
