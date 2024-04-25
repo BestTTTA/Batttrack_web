@@ -4,28 +4,12 @@ import QRCode from "react-qr-code";
 import Link from "next/link";
 import { GoHomeFill } from "react-icons/go";
 import QRCodeSVG from "qrcode";
+import Generate from "@/hooks/generate.hook";
 
 export default function Generate() {
+  const { ClickGenerate } = Generate();
   const [qrCodeValue, setQrCodeValue] = useState("โปรดใส่ชื่อโปรเจค");
 
-  const downloadQRCode = async () => {
-    if (!qrCodeValue) {
-      console.error("No QR Code value provided for download");
-      return;
-    }
-
-    try {
-      const url = await QRCodeSVG.toDataURL(qrCodeValue);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = `QRCode-${new Date().toISOString()}.png`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch (error) {
-      console.error('Error generating QR code for download:', error);
-    }
-  };
 
   return (
     <>
@@ -41,11 +25,11 @@ export default function Generate() {
           {qrCodeValue !== "" && <QRCode value={qrCodeValue} className="mb-6" />}
           <input
             className="border border-gray-400 p-2 rounded-lg"
-            onChange={(e) => setQrCodeValue(e.target.value)}
+            onChange={(e) => ClickGenerate.setQrCodeValue(e.target.value)}
             placeholder="ใส่ชื่อโปรเจค"
           />
           <button
-            onClick={downloadQRCode}
+            onClick={ClickGenerate.downloadQRCode}
             className="m-4 text-md rounded-md px-4 py-2 bg-orange-500 text-white transition-colors"
           >
             Download QR Code

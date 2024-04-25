@@ -12,7 +12,6 @@ export default function Scan() {
   const [showModal, setShowModal] = useState(false);
   const qrRef = useRef(null);
   
-
   const handleScan = (result, error) => {
     if (result) {
       setData(result.text);
@@ -31,12 +30,8 @@ export default function Scan() {
   };
 
   const handleOK = async () => {
-    router.push({
-      pathname: '/process',
-      query: { data: data },
-    });
+    router.push("/process");
   };
-
 
   return (
     <>
