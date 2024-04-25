@@ -142,7 +142,7 @@ export default function Process() {
                     <p className='text-orange-500 text-center font-bold text-[17px] my-2'>{projectDetails.name_project}</p>
                     <p className="text-white"><strong>เวลาเริ่ม:</strong> {projectDetails.timestart}</p>
                     <p className="text-white"><strong>เวลาจบ:</strong> {projectDetails.endtime}</p>
-                    <p className="text-white"><strong>สถานะ:</strong> {projectDetails.process_status ? 'เสร็จแล้ว' : 'ยังไม่เสร็จ'}</p>
+                    <p className="text-white"><strong>สถานะ:</strong> {projectDetails.process_status ? 'ดำเนินการเสร็จสิ้น' : 'ยังไม่ดำเนินการ'}</p>
                     <h2 className='font-bold text-center m-4 text-gray-300'>ขั้นตอน</h2>
                     <RenderStepsDropdown projectDetails={projectDetails} />
                 </div>
