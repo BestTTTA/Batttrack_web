@@ -51,7 +51,7 @@ export default function Select() {
                     </div>
                     <div className="flex  w-full h-fit justify-center items-center flex-col flex-auto">
                         <button onClick={() => {
-                            router.push("/CheckQr")
+                            router.push("/checkqr")
                         }} className="flex p-2 justify-center items-center focus:scale-95 w-32 h-32 rounded-lg bg-gray-800 shadow-md shadow-gray-950/50 bg-gradient-to-b from-blue-500 to-blue-300">
                             <FaListCheck color="white" size={50} />
                         </button>

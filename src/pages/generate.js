@@ -35,7 +35,7 @@ export default function Generate() {
             Download QR Code
           </button>
           <Link
-            href="/"
+            href="/select"
             className="m-4 text-md rounded-md px-4 py-2 hover:underline"
           >
             <GoHomeFill size={50} color="black" />
