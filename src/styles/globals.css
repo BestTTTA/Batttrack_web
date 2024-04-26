@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 /* styles/globals.css */
-body, button, input, textarea, select {
-    font-family: 'Noto Sans', sans-serif; /* Adjust the font-family name as needed */
-  }
+body {
+  font-family: 'Noto Sans', sans-serif; /* ระบุ font-family ที่คุณต้องการใช้ทั่วไป */
+}
+
   

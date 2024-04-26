@@ -6,25 +6,18 @@ import { MdOutlineArrowBackIosNew } from "react-icons/md";
 function ExcelReader() {
     const [data, setData] = useState([]);
     const router = useRouter();
-
     const handleFile = (file) => {
         const reader = new FileReader();
         reader.onload = async (evt) => {
-            // Parse data
             const bstr = evt.target.result;
             const wb = XLSX.read(bstr, { type: 'binary' });
-            // Get first worksheet
             const wsname = wb.SheetNames[0];
             const ws = wb.Sheets[wsname];
-            // Convert array of arrays
             const data = XLSX.utils.sheet_to_json(ws, { header: 1 });
             setData(data);
-            // Call update steps function
-            // await updateStepsFromExcel(data);
         };
         reader.readAsBinaryString(file);
     }
-
     const handleChange = (e) => {
         const files = e.target.files;
         if (files && files[0]) {
@@ -50,13 +43,6 @@ function ExcelReader() {
             <button onClick={() => router.back()} className="absolute top-5 left-5">
                 <MdOutlineArrowBackIosNew color='white' size={30} />
             </button>
-            {/* <div
-                onDrop={handleDrop}
-                onDragOver={handleDragOver}
-                className='border border-dashed w-full flex justify-center p-16'
-            >
-                Drop file here
-            </div> */}
             <div>
                 <input
                     type="file"

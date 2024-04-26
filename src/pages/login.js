@@ -1,11 +1,12 @@
-import React from 'react';
-import UseLogin from '@/hooks/login.hook';
+import React, { useContext } from 'react';
+import UseLogin from '@/hooks/useLogin.hook';
 import Link from 'next/link';
 import Image from 'next/image';
+import { AppContext } from "@/hooks/useContext";
 
 export default function Login() {
     const { ClickLogin } = UseLogin();
-
+    const { username } = useContext(AppContext);
     return (
         <main className=" bg-gray-900 h-screen flex items-center px-12">
 

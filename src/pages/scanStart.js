@@ -1,19 +1,22 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { QrReader } from "react-qr-reader";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { IoIosQrScanner } from "react-icons/io";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
+import { AppContext } from "@/hooks/useContext";
 
 export default function ScanStart() {
   const router = useRouter();
   const [id_project, setData] = useState("No result");
   const [showModal, setShowModal] = useState(false);
   const qrRef = useRef(null);
+  const { setId } = useContext(AppContext);
 
   const handleScan = (result, error) => {
     if (result) {
       setData(result.text);
+      setId(result.text)
       setShowModal(true);
       qrRef.current?.stop();
     }

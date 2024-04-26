@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import { IoIosQrScanner } from "react-icons/io";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
-import UpdateProject from "@/hooks/UpdateProject.hook"
-import UpdateSteps from "@/hooks/UpdateSteps.hook";
+import UpdateProject from "@/hooks/useUpdateProject.hook"
+import UpdateSteps from "@/hooks/useUpdateSteps.hook";
 
 export default function ScanCreatework() {
     const router = useRouter();
@@ -13,7 +13,7 @@ export default function ScanCreatework() {
     const [showModal, setShowModal] = useState(false);
     const qrRef = useRef(null);
     const { ClickUpdataProject } = UpdateProject();
-    const { pressUpdateTimestart, Updatestepstarttime, Updatestepemployee, Updatestependtime } = UpdateSteps();
+    const { pressUpdateTimestart, updateProjectStepTimeStart, updateProjectStepEmployee, Updatestependtime } = UpdateSteps();
 
     const handleScan = (result, error) => {
         if (result) {
@@ -34,8 +34,8 @@ export default function ScanCreatework() {
 
     const handleOK = async () => {
         // await updateStepStart();
-        await Updatestepstarttime();
-        await Updatestepemployee();
+        updateProjectStepTimeStart();
+        updateProjectStepEmployee();
         await pressUpdateTimestart();
         router.push('/process');
         localStorage.setItem("id_project", id_project);

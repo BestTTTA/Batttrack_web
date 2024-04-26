@@ -1,13 +1,16 @@
-import axios from "axios"
-import { useState, useEffect } from "react";
+import axios from "axios";
+import { useState, useContext, useEffect } from "react";
 import { useRouter } from 'next/router';
+import { AppContext } from "@/hooks/useContext";
 
 export default function useLogin() {
-    const [name, setName] = useState("")
-    const [password, setPassword] = useState("")
-    const [loading, setLoading] = useState(false)
+    const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
     const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+    const { setUsername } = useContext(AppContext);
     const router = useRouter();
+
 
     useEffect(() => {
         const Getdata = () => {
@@ -33,23 +36,21 @@ export default function useLogin() {
             const response = await axios.post(`${BASE_URL}/login/`, `grant_type=&username=${name}&password=${password}&scope=&client_id=&client_secret=`);
             console.log("login", response.status);
             if (response.status === 200) {
+                setUsername(name); 
                 router.push("/select");
                 localStorage.setItem("Name", name);
                 localStorage.setItem("Password", password);
             }
         } catch (error) {
             console.error("error login", error);
-            console.log(name, password)
-            alert("ชื่อ หรือ รหัสผ่าน ไม่ถูกต้อง")
+            alert("ชื่อหรือรหัสผ่านไม่ถูกต้อง");
         }
         setLoading(false);
-
     };
-
 
     return {
         ClickLogin: {
             Login, name, password, nameChange, passwordChange, loading
         }
-    }
+    };
 }

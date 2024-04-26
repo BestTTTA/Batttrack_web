@@ -4,7 +4,7 @@ import QRCode from "react-qr-code";
 import Link from "next/link";
 import { GoHomeFill } from "react-icons/go";
 import QRCodeSVG from "qrcode";
-import useGenerate from "@/hooks/generate.hook";
+import useGenerate from "@/hooks/useGenerate.hook";
 
 export default function Generate() {
   const { ClickGenerate } = useGenerate();

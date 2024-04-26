@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState } from 'react';
 export default function Generate() {
     const [qrCodeValue, setQrCodeValue] = useState("โปรดใส่ชื่อโปรเจค");

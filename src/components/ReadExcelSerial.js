@@ -3,16 +3,16 @@ import * as XLSX from 'xlsx';
 import { useRouter } from 'next/router';
 import { AppContext } from "@/hooks/useContext";
 
-function ExcelReader() {
+function ReadExcelSerial() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    const [fileName, setFileName] = useState('');
-    const { setSteps } = useContext(AppContext);
+    const [fileNameserial, setFileNameserial] = useState('');
+    const { setSerials } = useContext(AppContext);
 
-    const handleFile = (file) => {
+    const handleFileserial = (file) => {
         setLoading(true);
-        setFileName(file.name);
+        setFileNameserial(file.name);
         const reader = new FileReader();
         reader.onload = async (evt) => {
             try {
@@ -21,7 +21,7 @@ function ExcelReader() {
                 const wsname = wb.SheetNames[0];
                 const ws = wb.Sheets[wsname];
                 const data = XLSX.utils.sheet_to_json(ws, { header: 1 });
-                setSteps(JSON.stringify(data));
+                setSerials(JSON.stringify(data));
                 setError('');
             } catch (e) {
                 setError('Failed to read or process file');
@@ -35,10 +35,10 @@ function ExcelReader() {
         reader.readAsBinaryString(file);
     }
 
-    const handleChange = (e) => {
-        const files = e.target.files;
-        if (files && files[0]) {
-            handleFile(files[0]);
+    const handleChangeserial = (e) => {
+        const fileserial = e.target.files;  // Changed from `e.target.fileserial` to `e.target.files` to correctly access the file list
+        if (fileserial && fileserial[0]) {
+            handleFileserial(fileserial[0]);
         }
     }
 
@@ -48,38 +48,38 @@ function ExcelReader() {
                 <div className='w-full h-fit'>
                     <input
                         type="file"
-                        id="file-input-template"
-                        onChange={handleChange}
+                        id="file-input-serial" // Consistent ID for all input instances
+                        onChange={handleChangeserial}
                         accept=".xlsx,.xls"
                         hidden
                     />
                     <label
-                        htmlFor="file-input-template"
+                        htmlFor="file-input-serial"
                         className="p-2 relative text-sm text-white cursor-pointer w-full flex items-center justify-center border border-dashed rounded-lg h-32"
                     >
-                        {fileName ? `Loaded: ${fileName}` : "เลือกTemplate +"}
+                        {fileNameserial ? `Loaded: ${fileNameserial}` : "เลือกSerial +"}
                     </label>
                 </div>
             ) : (
                 <div className='w-full h-fit'>
                     <input
                         type="file"
-                        id="file-input-template" // Use the same ID for consistency
-                        onChange={handleChange}
+                        id="file-input-serial" 
+                        onChange={handleChangeserial}
                         accept=".xlsx,.xls"
                         hidden
                     />
                     <label
-                        htmlFor="file-input-template" // Ensure this matches the ID of the input
+                        htmlFor="file-input-serial"
                         className="relative text-white cursor-pointer w-full flex items-center justify-center border border-dashed rounded-lg h-32"
                     >
                         Loading...
                     </label>
-                </div>)
-            }
+                </div>
+            )}
             {error && <p className="text-red-500">{error}</p>}
         </div>
     );
 }
 
-export default ExcelReader;
+export default ReadExcelSerial;

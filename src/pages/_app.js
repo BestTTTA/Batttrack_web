@@ -1,15 +1,12 @@
-import '@/styles/globals.css'
-import { Noto_Sans } from 'next/font/google'
-
-const noto_sans = Noto_Sans({
-  weight: '400',
-  subsets: ['latin-ext'],
-})
+import '@/styles/globals.css';
+import Context from '@/hooks/useContext.js'; // Make sure this import path is correct
 
 export default function App({ Component, pageProps }) {
   return (
-    <main className={noto_sans.className}>
-      <Component {...pageProps} />
-    </main>
-  )
+    <Context> 
+      <main>
+        <Component {...pageProps} />
+      </main>
+    </Context>
+  );
 }

@@ -1,20 +1,21 @@
-import useProcess from "@/hooks/process.hook"
+import useProcess from "@/hooks/useProcess.hook"
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import RenderStepsDropdown from "@/components/Stepdropdown";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import Head from "next/head";
-import useUpdateSteps from "@/hooks/UpdateSteps.hook";
+import useUpdateSteps from "@/hooks/useUpdateSteps.hook";
+import Loading from "@/components/Loading"
+
 
 export default function Process() {
     const router = useRouter();
     const [Id, setId] = useState(null);
     const { projectDetails, fetchData } = useProcess(Id);
     const Step = projectDetails?.process_step
-    const { pressUpdateEndtime, BreakStart, BreakEnd } = useUpdateSteps();
+    const { pressUpdateEndtime, breakStart, breakEnd } = useUpdateSteps();
     const [isOkBreak, setIsokBreak] = useState(false)
     const [isOkBreakEnd, setIsokBreakEnd] = useState(false)
-    const [show, setShow] = useState(null)
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -36,18 +37,11 @@ export default function Process() {
     }, [Step]);
 
     if (!projectDetails) {
-        return (
-            <div className='absolute left-0 flex justify-center items-center w-full h-screen bg-gray-900 opacity-50'>
-                <span className="animate-ping absolute inline-flex justify-center items-center h-12 w-12 rounded-full bg-orange-400 opacity-80">
-                    <span className="animate-ping absolute inline-flex h-4 w-4 rounded-full bg-orange-400 opacity-90"></span>
-                </span>
-            </div>
-        )
+        return <Loading />
     }
 
-
     const ContinueBreak = async () => {
-        await BreakStart();
+        breakStart();
         setIsokBreak(false);
     }
     const SetOpenOkBreak = () => {
@@ -68,7 +62,6 @@ export default function Process() {
                     <button
                         className="bg-gray-200 h-12 text-gray-800 rounded-md"
                         onClick={() => { setIsokBreak(false) }}
-                    // onClick={handleCloseModal}
                     >
                         ยกเลิก
                     </button>
@@ -79,7 +72,7 @@ export default function Process() {
 
 
     const ContinueBreakEnd = async () => {
-        await BreakEnd();
+        breakEnd();
         setIsokBreakEnd(false);
     }
     const SetOpenOkBreakEnd = () => {
@@ -100,7 +93,6 @@ export default function Process() {
                     <button
                         className="bg-gray-200 h-12 text-gray-800 rounded-md"
                         onClick={() => { setIsokBreakEnd(false) }}
-                    // onClick={handleCloseModal}
                     >
                         ยกเลิก
                     </button>
@@ -108,25 +100,6 @@ export default function Process() {
             </div>
         )
     }
-
-
-    function BreakButton() {
-        if (projectDetails && Step && Step.length > 0) {
-            for (let i = 0; i < Step.length; i++) {
-                if (Step[i].start_break !== "-" && Step[i].end_break === "-") {
-                    return (
-                        <button onClick={SetOpenOkBreakEnd} className="bg-white rounded-lg p-2 w-full text-red-600 font-bold focus:scale-95">เริ่มงานต่อ</button>
-                    );
-                } else if (Step[i].start_break === "-" && Step[i].timestart !== "-") {
-                    return (
-                        <button onClick={SetOpenOkBreak} className="bg-white rounded-lg p-2 w-full text-red-600 font-bold focus:scale-95">พัก</button>
-                    );
-                }
-            }
-        }
-        return null;
-    }
-
 
     return (
         <>
@@ -142,24 +115,25 @@ export default function Process() {
                     <p className='text-orange-500 text-center font-bold text-[17px] my-2'>{projectDetails.name_project}</p>
                     <p className="text-white"><strong>เวลาเริ่ม:</strong> {projectDetails.timestart}</p>
                     <p className="text-white"><strong>เวลาจบ:</strong> {projectDetails.endtime}</p>
-                    <p className="text-white"><strong>สถานะ:</strong> {projectDetails.process_status ? 'ดำเนินการเสร็จสิ้น' : 'ยังไม่ดำเนินการ'}</p>
+                    <p className="text-white"><strong>สถานะ:</strong> {projectDetails.process_status ? 'ดำเนินการเสร็จสิ้น' : 'กำลังดำเนินการ'}</p>
                     <h2 className='font-bold text-center m-4 text-gray-300'>ขั้นตอน</h2>
                     <RenderStepsDropdown projectDetails={projectDetails} />
                 </div>
                 <div className="flex flex-initial justify-center w-full gap-x-2 sm:w-[500px]">
-                    {/* {projectDetails.timestart !== "-" ? <BreakButton /> : null} */}
                     {
                         Step && Step.length > 0 && (
-                            Step.some(product => product.timestart !== "-" && product.endtime === "-") ?
+                            Step.some(product => product.timestart !== "-" && product.endtime === "-")
+                                ?
                                 (
                                     <>
                                         <button onClick={() => { router.push("/scanEndStep") }} className="bg-white rounded-lg p-2 w-full text-orange-500 font-bold focus:scale-95">แสกนจบงาน</button>
                                         <button onClick={SetOpenOkBreakEnd} className="bg-white rounded-lg p-2 w-full text-red-600 font-bold focus:scale-95">เริ่มงานต่อ</button>
                                         <button onClick={SetOpenOkBreak} className="bg-white rounded-lg p-2 w-full text-red-600 font-bold focus:scale-95">พัก</button>
                                     </>
-                                ) :
-                                Step.every(product => product.process_status === true) ?
-                                    // null
+                                )
+                                :
+                                Step.every(product => product.process_status === true)
+                                    ?
                                     <button onClick={() => { router.push("/select") }} className="bg-white rounded-lg p-2 w-full text-red-600 font-bold focus:scale-95">กลับหน้าหลัก</button>
                                     :
                                     (

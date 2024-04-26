@@ -4,15 +4,15 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import { IoIosQrScanner } from "react-icons/io";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
-import UpdateProject from "@/hooks/UpdateProject.hook"
-import UpdateSteps from "@/hooks/UpdateSteps.hook";
+import UpdateProject from "@/hooks/useUpdateProject.hook"
+import UpdateSteps from "@/hooks/useUpdateSteps.hook";
 
 export default function ScanEndStep() {
     const router = useRouter();
     const [id_project, setData] = useState("No result");
     const [showModal, setShowModal] = useState(false);
     const qrRef = useRef(null);
-    const { Updatestependtime, UpdatestepstatusEnd } = UpdateSteps();
+    const { updateProjectStepEndTime, updateProjectStepStatus } = UpdateSteps();
 
     const handleScan = (result, error) => {
         if (result) {
@@ -33,8 +33,8 @@ export default function ScanEndStep() {
 
     const handleOK = async () => {
         // await updateStepStart();
-        await Updatestependtime();
-        await UpdatestepstatusEnd();
+        updateProjectStepEndTime();
+        updateProjectStepStatus();
         router.push('/process');
         localStorage.setItem("id_project", id_project);
     };
