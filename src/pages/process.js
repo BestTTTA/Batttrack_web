@@ -6,7 +6,7 @@ import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import Head from "next/head";
 import useUpdateSteps from "@/hooks/useUpdateSteps.hook";
 import Loading from "@/components/Loading"
-
+import DownloadExcel from "@/components/Dowloaddata";
 
 export default function Process() {
     const router = useRouter();
@@ -134,7 +134,10 @@ export default function Process() {
                                 :
                                 Step.every(product => product.process_status === true)
                                     ?
-                                    <button onClick={() => { router.push("/select") }} className="bg-white rounded-lg p-2 w-full text-red-600 font-bold focus:scale-95">กลับหน้าหลัก</button>
+                                    <>
+                                        <button onClick={() => { router.push("/select") }} className="bg-white rounded-lg p-2 w-full text-red-600 font-bold focus:scale-95">กลับหน้าหลัก</button>
+                                        <DownloadExcel json_data={projectDetails}/>
+                                    </>
                                     :
                                     (
                                         <button onClick={() => { router.push("/scanCreatework") }} className="bg-white rounded-lg p-2 w-full text-orange-500 font-bold focus:scale-95">แสกนเริ่มงาน</button>

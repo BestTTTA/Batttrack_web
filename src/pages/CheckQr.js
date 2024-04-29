@@ -5,6 +5,7 @@ import { MdQrCodeScanner } from "react-icons/md";
 import { useRouter } from 'next/router';
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
 
+
 export default function CheckQr() {
     const router = useRouter();
     return (
