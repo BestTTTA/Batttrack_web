@@ -23,12 +23,12 @@ export default function UseRegister() {
                 username: name,
                 password: password
             })
-            console.log("Register", response.status)
+            // console.log("Register", response.status)
             if (response.status === 201) {
                 router.push("/login")
             }
         } catch (error) {
-            console.log("error Register", error)
+            // console.log("error Register", error)
             alert("ชื่อนี้ถูกใช้งานแล้ว")
         }
         setLoading(false)

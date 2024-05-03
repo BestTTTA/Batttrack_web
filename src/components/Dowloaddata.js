@@ -10,7 +10,7 @@ function DownloadExcel({ json_data }) {
         setLoading(true);
         try {
 
-            console.log("Received json_data:", json_data); 
+            // console.log("Received json_data:", json_data); 
 
             const flattenedData = json_data.process_step.map(step => {
                 const employeeNames = step.employee.map(emp => emp.name).join(", ");

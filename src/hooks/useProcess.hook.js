@@ -14,7 +14,7 @@ export default function useProcess(Id) {
             setProjectDetails(response.data);
         } catch (error) {
             console.error("Error fetching data", error);
-            console.log("seterror true")
+            // console.log("seterror true")
             setProjectDetails(null);
             router.push("/creatework")
         }

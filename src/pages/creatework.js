@@ -20,17 +20,17 @@ export default function Letcreatework() {
 
     const handleCreateWorkAndStep = async () => {
         if (!steps || !serials) {
-            console.log("No data found in local storage.");
+            // console.log("No data found in local storage.");
             return;
         }
         const dataStep = JSON.parse(steps);
         const dataSerial = JSON.parse(serials);
         if (!Array.isArray(dataStep) || dataStep.length === 0) {
-            console.log("Steps data is not an array or is empty.");
+            // console.log("Steps data is not an array or is empty.");
             return;
         }
         if (!Array.isArray(dataSerial) || dataSerial.length === 0) {
-            console.log("Serial data is not an array or is empty.");
+            // console.log("Serial data is not an array or is empty.");
             return;
         }
         await updateSerialsFromExcel(dataSerial);

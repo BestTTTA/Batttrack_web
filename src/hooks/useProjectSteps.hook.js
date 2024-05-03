@@ -15,7 +15,7 @@ export default function useProjectSteps() {
                 start_break: "-",
                 end_break: "-"
             });
-            console.log(`Step ${stepName} updated successfully`, response.data);
+            // console.log(`Step ${stepName} updated successfully`, response.data);
         } catch (error) {
             console.error(`Update Error at step ${stepName}`, error);
         }
@@ -29,7 +29,7 @@ export default function useProjectSteps() {
         for (let i = 1; i < stepsData.length; i++) {
             const stepEntry = stepsData[i];
             const stepName = Array.isArray(stepEntry) ? stepEntry[1] : stepEntry;
-            console.log("Step", stepName);
+            // console.log("Step", stepName);
             await updateStep(projectId, stepName);
         }
         // router.reload();

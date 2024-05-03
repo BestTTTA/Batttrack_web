@@ -20,9 +20,9 @@ export default function useUpdataproject() {
             const response = await axios.put(`${BASE_URL}/projects/${Id}/timestart/`, {
                 timestart: currentDateTimeThailand
             })
-            console.log("useStartproject")
+            // console.log("useStartproject")
         } catch (error) {
-            console.log("error useStartproject", error);
+            // console.log("error useStartproject", error);
         }
     }
 
@@ -31,9 +31,9 @@ export default function useUpdataproject() {
             const response = await axios.put(`${BASE_URL}/projects/${Id}/end_process/`, {
                 endtime: currentDateTimeThailand
             })
-            console.log("useEndproject")
+            // console.log("useEndproject")
         } catch (error) {
-            console.log("error useEndproject", error);
+            // console.log("error useEndproject", error);
         }
     }
 
@@ -42,9 +42,9 @@ export default function useUpdataproject() {
             const response = await axios.put(`${BASE_URL}/projects/${Id}/update_status/`, {
                 process_status: true
             })
-            console.log("useStatusproject")
+            // console.log("useStatusproject")
         } catch (error) {
-            console.log("error useStatusproject", error);
+            // console.log("error useStatusproject", error);
         }
     }
 

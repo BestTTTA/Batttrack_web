@@ -22,7 +22,7 @@ export default function useCreatework(dataSteps) {
                 await updateStepsFromExcel(name_project, dataSteps);  
                 router.push("/process");
             } else {
-                console.log('Unexpected status code:', response.status);
+                // console.log('Unexpected status code:', response.status);
             }
         } catch (error) {
             console.error("Error creating work", error.response ? error.response.data : error.message);

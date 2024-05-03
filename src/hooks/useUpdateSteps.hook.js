@@ -28,9 +28,9 @@ export default function useUpdateSteps() {
     const updateStep = async (stepUrl, data) => {
         try {
             const response = await axios.put(stepUrl, data);
-            console.log(`Step updated successfully`, response.data);
+            // console.log(`Step updated successfully`, response.data);
         } catch (error) {
-            console.log("Update step error", error);
+            // console.log("Update step error", error);
         }
     };
 
@@ -81,9 +81,9 @@ export default function useUpdateSteps() {
             const response = await axios.put(`${BASE_URL}/projects/${Id}/timestart`, {
                 timestart: currentDateTimeThailand
             });
-            console.log("Update timestart success", response.data);
+            // console.log("Update timestart success", response.data);
         } catch (error) {
-            console.log("pressUpdateTimestart error", error);
+            // console.log("pressUpdateTimestart error", error);
         }
     };
 
@@ -92,9 +92,9 @@ export default function useUpdateSteps() {
             const response = await axios.put(`${BASE_URL}/projects/${Id}/end_process`, {
                 endtime: currentDateTimeThailand
             });
-            console.log("Update endtime success", response.data);
+            // console.log("Update endtime success", response.data);
         } catch (error) {
-            console.log("pressUpdateEndprocess error", error);
+            // console.log("pressUpdateEndprocess error", error);
         }
     };
 

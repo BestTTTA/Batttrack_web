@@ -34,7 +34,7 @@ export default function useLogin() {
         setLoading(true);
         try {
             const response = await axios.post(`${BASE_URL}/login/`, `grant_type=&username=${name}&password=${password}&scope=&client_id=&client_secret=`);
-            console.log("login", response.status);
+            // console.log("login", response.status);
             if (response.status === 200) {
                 setUsername(name); 
                 router.push("/select");
