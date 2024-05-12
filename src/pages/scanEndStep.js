@@ -32,7 +32,6 @@ export default function ScanEndStep() {
 
 
     const handleOK = async () => {
-        // await updateStepStart();
         updateProjectStepEndTime();
         updateProjectStepStatus();
         router.push('/process');
