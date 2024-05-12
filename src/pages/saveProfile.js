@@ -68,9 +68,9 @@ function ProfileImagePicker() {
         }
     };
 
-    const saveNewname = () => {
-        localStorage.setItem("Name", rename)
-    }
+    // const saveNewname = () => {
+    //     localStorage.setItem("Name", rename)
+    // }
 
     const saveImageName = async () => {
         await saveImageToLocalStorage();
