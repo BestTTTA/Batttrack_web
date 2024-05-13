@@ -45,7 +45,7 @@ export default function Letcreatework() {
                 <ReadExcelSerial />
                 <div className='flex w-full justify-around gap-2'>
                     <button onClick={handleCreateWorkAndStep} className='w-full bg-white rounded-md p-2 text-orange-500 font-bold'>สร้าง Project</button>
-                    <button onClick={() => router.push("/select")} className='w-full bg-white rounded-md text-red-500 p-2'>ยกเลิก</button>
+                    <button onClick={() => router.push("/optionSelect")} className='w-full bg-white rounded-md text-red-500 p-2'>ยกเลิก</button>
                 </div>
             </div>
         </div>

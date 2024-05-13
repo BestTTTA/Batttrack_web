@@ -5,6 +5,9 @@ import { MdOutlineArrowBackIosNew } from "react-icons/md";
 
 function ExcelReader() {
     const [data, setData] = useState([]);
+    const [columnCount, setColumnCount] = useState(0);
+    const [rowCount, setRowCount] = useState(0);
+
     const router = useRouter();
     const handleFile = (file) => {
         const reader = new FileReader();
@@ -15,6 +18,11 @@ function ExcelReader() {
             const ws = wb.Sheets[wsname];
             const data = XLSX.utils.sheet_to_json(ws, { header: 1 });
             setData(data);
+            setRowCount(data.length);
+            if (data.length > 0) {
+                // Calculate the number of columns from the first row
+                setColumnCount(data[0].length);
+            }
         };
         reader.readAsBinaryString(file);
     }
@@ -36,7 +44,6 @@ function ExcelReader() {
     const handleDragOver = (e) => {
         e.preventDefault();
     }
-
 
     return (
         <div className='bg-gray-900 min-h-screen p-8 space-y-8'>
@@ -73,6 +80,8 @@ function ExcelReader() {
                     </table>
                 </div>
             )}
+            {/* <div>Total columns: {columnCount}</div>
+            <div>Total rows: {rowCount - 1}</div> */}
         </div>
     );
 }

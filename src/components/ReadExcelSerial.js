@@ -9,6 +9,7 @@ function ReadExcelSerial() {
     const [error, setError] = useState('');
     const [fileNameserial, setFileNameserial] = useState('');
     const { setSerials } = useContext(AppContext);
+    const [rowCount, setRowCount] = useState(0);
 
     const handleFileserial = (file) => {
         setLoading(true);
@@ -23,6 +24,7 @@ function ReadExcelSerial() {
                 const data = XLSX.utils.sheet_to_json(ws, { header: 1 });
                 setSerials(JSON.stringify(data));
                 setError('');
+                setRowCount(data.length - 1);
             } catch (e) {
                 setError('Failed to read or process file');
             }
@@ -64,7 +66,7 @@ function ReadExcelSerial() {
                 <div className='w-full h-fit'>
                     <input
                         type="file"
-                        id="file-input-serial" 
+                        id="file-input-serial"
                         onChange={handleChangeserial}
                         accept=".xlsx,.xls"
                         hidden
@@ -77,6 +79,7 @@ function ReadExcelSerial() {
                     </label>
                 </div>
             )}
+            <p className='text-white'>จำนวน Serials ทั้งหมด {rowCount}</p>
             {error && <p className="text-red-500">{error}</p>}
         </div>
     );
