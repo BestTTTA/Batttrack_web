@@ -18,11 +18,26 @@ function ExcelReader() {
             const ws = wb.Sheets[wsname];
             const data = XLSX.utils.sheet_to_json(ws, { header: 1 });
             setData(data);
-            setRowCount(data.length);
+
             if (data.length > 0) {
-                // Calculate the number of columns from the first row
-                setColumnCount(data[0].length);
+                setData(data);  // Set the full data in state
+                setColumnCount(data[0].length);  // Set column count based on the first row
+
+                // Find the index of the column named 'ลำดับ'
+                const sequenceIndex = data[0].indexOf('ลำดับ');
+                if (sequenceIndex !== -1) {
+                    // Filter out the header row and count unique entries in the 'ลำดับ' column
+                    const sequenceSet = new Set(data.slice(1).map(row => row[sequenceIndex]));
+                    setRowCount(sequenceSet.size - 1);  // Set row count based on unique 'ลำดับ' entries
+                } else {
+                    console.error('Column "ลำดับ" not found');
+                }
+            } else {
+                setData([]);
+                setColumnCount(0);
+                setRowCount(0);
             }
+
         };
         reader.readAsBinaryString(file);
     }
@@ -80,8 +95,8 @@ function ExcelReader() {
                     </table>
                 </div>
             )}
-            {/* <div>Total columns: {columnCount}</div>
-            <div>Total rows: {rowCount - 1}</div> */}
+            <div>Total columns: {columnCount}</div>
+            <div>Total rows: {rowCount}</div>
         </div>
     );
 }

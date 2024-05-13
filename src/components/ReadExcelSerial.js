@@ -24,7 +24,20 @@ function ReadExcelSerial() {
                 const data = XLSX.utils.sheet_to_json(ws, { header: 1 });
                 setSerials(JSON.stringify(data));
                 setError('');
-                setRowCount(data.length - 1);
+
+                if (data.length > 0) {
+                    const sequenceIndex = data[0].indexOf('ลำดับ');
+                    if (sequenceIndex !== -1) {
+                        // Filter out the header row and count unique entries in the 'ลำดับ' column
+                        const sequenceSet = new Set(data.slice(1).map(row => row[sequenceIndex]));
+                        setRowCount(sequenceSet.size - 1);  // Set row count based on unique 'ลำดับ' entries
+                    } else {
+                        console.error('Column "ลำดับ" not found');
+                    }
+                } else {
+                    setData([]);
+                    setRowCount(0);
+                }
             } catch (e) {
                 setError('Failed to read or process file');
             }
