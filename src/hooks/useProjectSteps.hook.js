@@ -17,7 +17,7 @@ export default function useProjectSteps() {
             });
             // console.log(`Step ${stepName} updated successfully`, response.data);
         } catch (error) {
-            console.error(`Update Error at step ${stepName}`, error);
+            console.error(`Update Error step ${stepName}`, error);
         }
     };
 
