@@ -37,7 +37,7 @@ export default function useLogin() {
             // console.log("login", response.status);
             if (response.status === 200) {
                 setUsername(name); 
-                router.push("/select");
+                router.push("/Select");
                 localStorage.setItem("Name", name);
                 localStorage.setItem("Password", password);
             }
