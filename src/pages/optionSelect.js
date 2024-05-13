@@ -52,7 +52,7 @@ export default function Select() {
                     </div>
                     <div className="flex  w-full h-fit justify-center items-center flex-col flex-auto">
                         <button className="flex p-2 justify-center items-center focus:scale-95 w-32 h-32 rounded-lg bg-gray-800 shadow-md shadow-gray-950/50 bg-gradient-to-b from-blue-500 to-blue-300">
-                            <Link href="/Checkqr">
+                            <Link href="/scanCheckqr">
                                 <span className="flex justify-center items-center w-full h-full">
                                     <FaListCheck color="white" size={50} />
                                 </span>
@@ -62,7 +62,7 @@ export default function Select() {
                     </div>
                     <div className="flex  w-full h-fit justify-center items-center flex-col flex-auto">
                         <button className="flex p-2 justify-center items-center focus:scale-95 w-32 h-32 rounded-lg bg-gray-800 shadow-md shadow-gray-950/50 bg-gradient-to-b from-green-500 to-cyan-300">
-                            <Link href="/Readexcel">
+                            <Link href="/forReadexcel">
                                 <span className="flex justify-center items-center w-full h-full">
                                     <SiMicrosoftexcel color="white" size={50} />
                                 </span>
